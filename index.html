@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وضعیت آب و هوا</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(193, 193, 193);
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid whitesmoke;
+            border-radius: 5px;
+        }
+        #weather-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgb(225, 231, 250);
+            border: 1px solid whitesmoke;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+        }
+        #weather-image {
+            width: 100%;
+            border-radius: 5px;
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>وضعیت آب و هوای شهرها</h1>
+    <select id="city-select" onchange="showWeather()">
+        <option value="">انتخاب شهر...</option>
+        <option value="تهران">تهران</option>
+        <option value="اصفهان">اصفهان</option>
+        <option value="مشهد">مشهد</option>
+        <option value="شیراز">شیراز</option>
+        <option value="تبریز">تبریز</option>
+    </select>
+
+    <div id="weather-info">
+        <h2 id="city-name"></h2>
+        <p id="weather-description"></p>
+        <img id="weather-image" src="" alt="" style="display:none;">
+    </div>
+</div>
+
+<script>
+    const weatherData = {
+        'تهران': { description: 'دما: 25 درجه سانتی‌گراد، وضعیت: آفتابی', image: 'img/com.ansarallah.advancedweather.forecast-78d0451d-0f29-41ce-878b-fbc0a05be7e9_512x512.webp' },
+        'اصفهان': { description: 'دما: 22 درجه سانتی‌گراد، وضعیت: ابری', image: 'img/rmeteotrend_sun_and_cloud2.png' },
+        'مشهد': { description: 'دما: 20 درجه سانتی‌گراد، وضعیت: بارانی', image: 'img/com.mfuzzy.weather_app_c1c22652-cf9d-4505-9a53-6a10cfde51b8.webp' },
+        'شیراز': { description: 'دما: 27 درجه سانتی‌گراد، وضعیت: صاف', image: 'img/rmeteotrend_sun_and_cloud2.png' },
+        'تبریز': { description: 'دما: 18 درجه سانتی‌گراد، وضعیت: مه‌آلود', image: 'img/weather.forecast.alerts.widget-328a7e75-c0fc-499f-8e90-03140dda08db_512x512.webp' }
+    };
+
+    function showWeather() {
+        const select = document.querySelector('#city-select');
+        const city = select.value;
+        const infoDiv = document.querySelector('#weather-info');
+        const cityName = document.querySelector('#city-name');
+        const weatherDescription = document.querySelector('#weather-description');
+        const weatherImage = document.querySelector('#weather-image');
+
+        if (city) {
+            cityName.innerText = city;
+            weatherDescription.innerText = weatherData[city].description;
+            weatherImage.src = weatherData[city].image;
+            weatherImage.style.display = 'block';
+            infoDiv.style.display = 'block';
+        } else {
+            infoDiv.style.display = 'none';
+            weatherImage.style.display = 'none';
+        }
+    }
+</script>
+
+
+</body>
+</html>
